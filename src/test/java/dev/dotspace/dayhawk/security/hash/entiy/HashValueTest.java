@@ -1,6 +1,5 @@
 package dev.dotspace.dayhawk.security.hash.entiy;
 
-import dev.dotspace.dayhawk.security.hash.HashManager;
 import dev.dotspace.dayhawk.security.hash.entity.IHashValue;
 import dev.dotspace.dayhawk.security.hash.entity.ImmutableHashValue;
 import org.junit.jupiter.api.Assertions;
@@ -12,16 +11,17 @@ import java.nio.charset.StandardCharsets;
 
 public final class HashValueTest {
 
+  private final byte[] VALUE_1 = "1".getBytes();
+
   @Test
   @DisplayName("Test HashValue")
   public void testHashValue() {
     //Positive
-    final IHashValue value = new ImmutableHashValue("1", "2".getBytes(StandardCharsets.UTF_8));
+    final IHashValue value = new ImmutableHashValue("ALGO", VALUE_1);
 
     Assertions.assertNotNull(value);
-    Assertions.assertEquals(value.algorithm(), "1");
-    Assertions.assertArrayEquals(value.get(), "2".getBytes(StandardCharsets.UTF_8));
-    Assertions.assertEquals(value.getAsString(), "2");
+    Assertions.assertEquals(value.algorithm(), "ALGO");
+    Assertions.assertArrayEquals(value.digest(), VALUE_1);
 
     //Negative
     Assertions.assertThrows(NullPointerException.class, () -> new ImmutableHashValue(null, null));
