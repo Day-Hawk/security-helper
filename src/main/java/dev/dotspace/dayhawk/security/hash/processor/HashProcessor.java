@@ -1,6 +1,5 @@
 package dev.dotspace.dayhawk.security.hash.processor;
 
-import dev.dotspace.dayhawk.security.hash.exception.DigestNotPresentException;
 import org.jetbrains.annotations.Nullable;
 
 

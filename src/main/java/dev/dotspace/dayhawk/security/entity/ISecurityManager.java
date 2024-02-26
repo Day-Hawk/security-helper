@@ -1,7 +1,5 @@
 package dev.dotspace.dayhawk.security.entity;
 
-import dev.dotspace.dayhawk.security.crypt.processor.ICryptProcessor;
-import dev.dotspace.dayhawk.security.hash.exception.DigestNotPresentException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
