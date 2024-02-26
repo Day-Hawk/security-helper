@@ -5,8 +5,8 @@ plugins {
 
 apply plugin: libs.plugins.lombok.get().pluginId
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'dev.dotspace.dayhawk'
+version = '1.0.0'
 
 repositories {
   mavenCentral()
@@ -15,8 +15,8 @@ repositories {
 dependencies {
   implementation libs.annotations
 
-  testImplementation platform('org.junit:junit-bom:5.9.1')
-  testImplementation 'org.junit.jupiter:junit-jupiter'
+  testImplementation libs.junit.jupiter.api
+  testImplementation libs.junit.jupiter.engine
 }
 
 test {
