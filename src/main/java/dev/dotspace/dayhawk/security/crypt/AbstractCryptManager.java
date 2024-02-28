@@ -6,10 +6,6 @@ import dev.dotspace.dayhawk.security.entity.AbstractSecurityManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.security.Provider.Service;
-import java.security.Security;
-import java.util.Arrays;
-
 
 /**
  * The {@code AbstractCryptManager} class is an abstract implementation of the {@code ICryptManager} interface.
@@ -41,13 +37,7 @@ public abstract class AbstractCryptManager
    * based on available security providers.
    */
   protected AbstractCryptManager() {
-    super(Arrays.stream(Security.getProviders())
-        .flatMap(provider ->
-            provider.getServices()
-                .stream()
-                .filter(AbstractCryptManager::isCipher)
-                .map(Service::getAlgorithm))
-        .toList());
+    super("Cipher");
   }
 
   /**
@@ -59,17 +49,5 @@ public abstract class AbstractCryptManager
   @Override
   public @NotNull ICryptProcessor processor(@Nullable String algorithm) {
     return new CryptProcessor(algorithm);
-  }
-
-  //static
-
-  /**
-   * Checks if the provided service represents a Cipher algorithm.
-   *
-   * @param service The service to check.
-   * @return {@code true} if the service represents a Cipher algorithm, {@code false} otherwise.
-   */
-  private static boolean isCipher(@NotNull final Service service) {
-    return "Cipher".equals(service.getType());
   }
 }

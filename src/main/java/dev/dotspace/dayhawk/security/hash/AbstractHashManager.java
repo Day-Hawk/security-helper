@@ -6,8 +6,6 @@ import dev.dotspace.dayhawk.security.hash.processor.IHashProcessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.security.Security;
-import java.util.ArrayList;
 
 /**
  * The {@code AbstractHashManager} class is an abstract implementation of the {@link AbstractSecurityManager}
@@ -35,13 +33,15 @@ import java.util.ArrayList;
  * @see IHashManager
  * @see IHashProcessor
  */
-public abstract class AbstractHashManager extends AbstractSecurityManager<IHashProcessor> implements IHashManager {
+public abstract class AbstractHashManager
+    extends AbstractSecurityManager<IHashProcessor>
+    implements IHashManager {
 
   /**
    * Constructs an {@code AbstractHashManager} with the specified list of supported cryptographic algorithms.
    */
   protected AbstractHashManager() {
-    super(new ArrayList<>(Security.getAlgorithms("MessageDigest")));
+    super("MessageDigest");
   }
 
   /**

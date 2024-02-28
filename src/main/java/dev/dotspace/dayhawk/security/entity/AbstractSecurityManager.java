@@ -1,9 +1,12 @@
 package dev.dotspace.dayhawk.security.entity;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -43,10 +46,13 @@ public abstract class AbstractSecurityManager<PROCESSOR extends ISecurityProcess
   /**
    * Constructs an {@code AbstractSecurityManager} with the specified list of supported cryptographic algorithms.
    *
-   * @param algorithmList The list of supported cryptographic algorithms.
+   * @param service The list of supported cryptographic algorithms.
    */
-  protected AbstractSecurityManager(@NotNull final List<String> algorithmList) {
-    this.algorithmList = algorithmList;
+  protected AbstractSecurityManager(@Nullable final String service) {
+    //Null check
+    Objects.requireNonNull(service);
+
+    this.algorithmList = new ArrayList<>(Security.getAlgorithms(service));
   }
 
   /**
